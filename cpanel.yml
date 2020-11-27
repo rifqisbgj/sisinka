@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/bagjagro/sisinka.bagjagroup.site/
+    - /bin/cp -R * $DEPLOYPATH
