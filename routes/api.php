@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::post('login','Api\AuthController@login');
 Route::post('register','Api\AuthController@register');
 Route::get('logout','Api\AuthController@logout');
+
+// Kajian
+Route::group(['middleware' => ['jwtAuth']], function () {
+    Route::post('kajian/create','Api\KajianController@create');
+    Route::post('kajian/delete','Api\KajianController@delete');
+    Route::post('kajian/update','Api\KajianController@update');
+    Route::get('kajian','Api\KajianController@kajian');
+
+    Route::post('kajian/simpan','Api\SimpankajianController@simpankajian');
+});
