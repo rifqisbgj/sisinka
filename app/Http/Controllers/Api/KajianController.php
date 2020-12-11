@@ -14,6 +14,7 @@ class KajianController extends Controller
         $kajian = Kajian::orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
+            $kaj['user'] = $kaj->user;
             foreach ($kaj->simpankajian as $simpan) {
                 if($simpan->id_user == Auth::user()->id){
                     $kaj['selfSave'] = true;
