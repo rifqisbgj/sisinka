@@ -33,6 +33,7 @@ class KajianController extends Controller
         $kajian = new Kajian();
         $kajian->id_user = Auth::user()->id;
         $kajian->kode_kajian = $kajian->kodekajian();
+        $kajian->judul_kajian = $req->judul_kajian;
         $kajian->tanggal_kajian = $req->tanggal_kajian;
         $kajian->jenis_kajian = $req->jenis_kajian;
         $kajian->pengisi_kajian = $req->pengisi_kajian;
