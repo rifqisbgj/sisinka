@@ -42,7 +42,7 @@ class KajianController extends Controller
         $kajian->kategori_kajian = $req->kategori_kajian;
 
         if($req->photo != ''){
-            $photo = time().'jpg';
+            $photo = time().'.jpg';
             file_put_contents('storage/kajian/'.$photo, base64_decode($req->photo));
             $kajian->poster_kajian = $photo;
         }
