@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class KajianController extends Controller
 {
-    public function kajian()
+    public function kajian(Request $req)
     {
-        $kajian = Kajian::where('status_publikasi','1')->orderBy('id','desc')->get();
+        $kajian = Kajian::where('status_publikasi','1')
+                        ->where('lokasi_kajian', $req->lokasiuser)
+                        ->orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
             $kaj['user'] = $kaj->user;
