@@ -11,7 +11,7 @@ class KajianController extends Controller
 {
     public function kajian()
     {
-        $kajian = Kajian::orderBy('id','desc')->get();
+        $kajian = Kajian::where('status_publikasi','1')->orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
             $kaj['user'] = $kaj->user;
