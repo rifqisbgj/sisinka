@@ -30,6 +30,27 @@ class KajianController extends Controller
         ]);
     }
 
+
+    public function kajianByMe()
+    {
+        $kajian = Kajian::where('id_user',Auth::user()->id)
+                        ->orderBy('id','desc')->get();
+        foreach ($kajian as $kaj) {
+            $kaj['selfSave'] = false;
+            $kaj['user'] = $kaj->user;
+            foreach ($kaj->simpankajian as $simpan) {
+                if($simpan->id_user == Auth::user()->id){
+                    $kaj['selfSave'] = true;
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'allKajian' => $kajian
+        ]);
+    }
+
     public function create(Request $req)
     {
         $kajian = new Kajian();
