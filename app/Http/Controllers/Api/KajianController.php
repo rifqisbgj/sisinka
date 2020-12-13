@@ -12,7 +12,7 @@ class KajianController extends Controller
     public function kajian(Request $req)
     {
         $kajian = Kajian::where('status_publikasi','1')
-                        ->orWhere('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
+                        ->Where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
                         ->orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
