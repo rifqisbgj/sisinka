@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Kajian;
+use App\Simpankajian;
 use Illuminate\Support\Facades\Auth;
 
 class KajianController extends Controller
@@ -30,7 +31,6 @@ class KajianController extends Controller
         ]);
     }
 
-
     public function kajianByMe()
     {
         $kajian = Kajian::where('id_user',Auth::user()->id)
@@ -48,6 +48,18 @@ class KajianController extends Controller
         return response()->json([
             'success' => true,
             'allKajian' => $kajian
+        ]);
+    }
+
+    public function kajianSaveByMe(){
+        $simpan = Simpankajian::where('id_user', Auth::user()->id)->get();
+        foreach($simpan as $s){
+            $s->user;
+            $s->simpankajian;
+        }
+        return response()->json([
+            'success' => true,
+            'kajiansaved' => $simpan
         ]);
     }
 

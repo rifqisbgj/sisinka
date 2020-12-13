@@ -27,6 +27,7 @@ Route::group(['middleware' => ['jwtAuth']], function () {
     Route::get('kajian/jeniskajian','Api\KajianController@findByJenisKajian');
     Route::get('kajian','Api\KajianController@kajian');
     Route::get('kajian/byme','Api\KajianController@kajianByMe');
+    Route::get('kajian/save','Api\KajianController@kajianSaveByMe');
 
     Route::post('kajian/simpan','Api\SimpankajianController@simpankajian');
 
