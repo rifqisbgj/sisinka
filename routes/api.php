@@ -28,4 +28,7 @@ Route::group(['middleware' => ['jwtAuth']], function () {
     Route::get('kajian','Api\KajianController@kajian');
 
     Route::post('kajian/simpan','Api\SimpankajianController@simpankajian');
+
+    Route::get('donation','Api\DonationController@donation');
+
 });
