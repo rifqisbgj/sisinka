@@ -15,7 +15,8 @@ class SimpankajianController extends Controller
         $simpan = Simpankajian::where('id_kajian',$req->id_kajian)->where('id_user',Auth::user()->id)->get();
         $a = Kajian::where('id',$req->id_kajian)->first();
         if(count($simpan)>0){
-            $a->suka_kajian -= 1;
+            $a->suka_kajian = $a->suka_kajian - 1;
+            $a->save();
             $simpan[0]->delete();
             return response()->json([
                 'success' => true,
@@ -27,6 +28,7 @@ class SimpankajianController extends Controller
         $simpan->id_kajian = $req->id_kajian;
         $simpan->id_user = Auth::user()->id;
         $a->suka_kajian += 1;
+        $a->save();
         $simpan->tambahsimpan($req->id_kajian);
         $simpan->save();
 
