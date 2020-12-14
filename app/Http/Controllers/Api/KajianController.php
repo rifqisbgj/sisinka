@@ -94,6 +94,7 @@ class KajianController extends Controller
     public function findByKode(Request $req)
     {
         $kajian = Kajian::where('status_publikasi','1')
+                        ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
                         ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
                         ->orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
@@ -124,7 +125,8 @@ class KajianController extends Controller
     public function findByJenisKajian(Request $req)
     {
         $kajian = Kajian::where('status_publikasi','1')
-                        ->Where('jenis_kajian', 'like', '%'.$req->jenis_kajian.'%')
+                        ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
+                        ->where('jenis_kajian', 'like', '%'.$req->jenis_kajian.'%')
                         ->orderBy('id','desc')->get();
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
