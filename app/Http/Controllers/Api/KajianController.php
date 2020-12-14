@@ -93,7 +93,7 @@ class KajianController extends Controller
 
     public function findByKode(Request $req)
     {
-        if($req->jenis_kajian == null){
+        if($req->jenis_kajian == "all"){
             $kajian = Kajian::where('status_publikasi','1')
             ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
             ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
