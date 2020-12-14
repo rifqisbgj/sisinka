@@ -151,4 +151,22 @@ class KajianController extends Controller
             'allKajian' => $kajian
         ]);
     }
+
+    public function findById(Request $req)
+    {
+        $kajian = Kajian::where('id',$req->id)->get();
+        foreach ($kajian as $kaj) {
+            $kaj['selfSave'] = false;
+            foreach ($kaj->simpankajian as $simpan) {
+                if($simpan->id_user == Auth::user()->id){
+                    $kaj['selfSave'] = true;
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'allKajian' => $kajian
+        ]);
+    }
 }
