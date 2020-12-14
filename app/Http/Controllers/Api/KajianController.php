@@ -93,10 +93,18 @@ class KajianController extends Controller
 
     public function findByKode(Request $req)
     {
-        $kajian = Kajian::where('status_publikasi','1')
-                        ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
-                        ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
-                        ->orderBy('id','desc')->get();
+        if($req->jenis_kajian == null){
+            $kajian = Kajian::where('status_publikasi','1')
+            ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
+            ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
+            ->orderBy('id','desc')->get();
+        }else{
+            $kajian = Kajian::where('status_publikasi','1')
+            ->where('jenis_kajian', 'like', '%'.$req->jenis_kajian.'%')
+            ->where('lokasi_kajian', 'like', '%'.$req->lokasiuser.'%')
+            ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
+            ->orderBy('id','desc')->get();
+        }
         foreach ($kajian as $kaj) {
             $kaj['selfSave'] = false;
             $kaj['user'] = $kaj->user;
