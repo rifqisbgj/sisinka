@@ -93,10 +93,22 @@ class KajianController extends Controller
 
     public function findByKode(Request $req)
     {
-        $kajian = Kajian::where('kode_kajian', $req->kode_kajian)->get();
+        $kajian = Kajian::where('status_publikasi','1')
+                        ->Where('judul_kajian', 'like', '%'.$req->judul_kajian.'%')
+                        ->orderBy('id','desc')->get();
+        foreach ($kajian as $kaj) {
+            $kaj['selfSave'] = false;
+            $kaj['user'] = $kaj->user;
+            foreach ($kaj->simpankajian as $simpan) {
+                if($simpan->id_user == Auth::user()->id){
+                    $kaj['selfSave'] = true;
+                }
+            }
+        }
+
         return response()->json([
             'success' => true,
-            'detail' => $kajian
+            'allKajian' => $kajian
         ]);
     }
 
@@ -111,10 +123,22 @@ class KajianController extends Controller
 
     public function findByJenisKajian(Request $req)
     {
-        $kajian = Kajian::where('jenis_kajian', $req->jenis_kajian)->get();
+        $kajian = Kajian::where('status_publikasi','1')
+                        ->Where('jenis_kajian', 'like', '%'.$req->jenis_kajian.'%')
+                        ->orderBy('id','desc')->get();
+        foreach ($kajian as $kaj) {
+            $kaj['selfSave'] = false;
+            $kaj['user'] = $kaj->user;
+            foreach ($kaj->simpankajian as $simpan) {
+                if($simpan->id_user == Auth::user()->id){
+                    $kaj['selfSave'] = true;
+                }
+            }
+        }
+
         return response()->json([
             'success' => true,
-            'detail' => $kajian
+            'allKajian' => $kajian
         ]);
     }
 }
