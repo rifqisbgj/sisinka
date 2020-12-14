@@ -28,7 +28,6 @@ class SimpankajianController extends Controller
         $simpan->id_kajian = $req->id_kajian;
         $simpan->id_user = Auth::user()->id;
         $a->suka_kajian += 1;
-        $a->save();
         $simpan->tambahsimpan($req->id_kajian);
         $simpan->save();
 
